@@ -1,0 +1,1 @@
+sights <- read.csv("data/sights_v2.csv")

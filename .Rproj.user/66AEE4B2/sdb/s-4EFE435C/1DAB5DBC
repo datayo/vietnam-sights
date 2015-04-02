@@ -1,0 +1,17 @@
+{
+    "contents" : "source('R/load.R')\nsource('R/visualize.R')",
+    "created" : 1427765990516.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2302064584",
+    "id" : "1DAB5DBC",
+    "lastKnownWriteTime" : 1427790778,
+    "path" : "~/Works/dataR/vietnam-sights/script.R",
+    "project_path" : "script.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : true,
+    "type" : "r_source"
+}

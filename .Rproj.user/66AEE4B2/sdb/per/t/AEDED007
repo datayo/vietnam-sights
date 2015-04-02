@@ -1,0 +1,16 @@
+{
+    "contents" : "---\ntitle: \"Vietnamese Sights\"\nauthor: \"Brother Rain\"\ndate: \"30/03/2015\"\noutput: html_document\n---\n\n> \n\n\n```{r, eval=FALSE}\nlibrary(leaflet)\nlibrary(RCurl)\nlibrary(RJSONIO)\nlibrary(plyr)\n```\n\n> Vietnam has many sightseeings. Where's sightseeings in Vietnam?\n\n## Data\n\nI use some javascript code to crawl data from [http://www.lonelyplanet.com/vietnam/sights](http://www.lonelyplanet.com/vietnam/sights), the result save in `sights.json` file\n\n```{r, eval=FALSE}\nrequire(jsonlite)\nsights.raw <- readLines(\"sights.json\")\nsights <- fromJSON(sights.raw)\nfirst <- sights[[2]]\nfirst.name <- first[1]\nfirst[1]\ngeoCode(first.name)\n```\n\n## EDA\n\n![](http://i.imgur.com/gxPX9oF.png)",
+    "created" : 1427854124700.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4053886524",
+    "id" : "AEDED007",
+    "lastKnownWriteTime" : 1427854128,
+    "path" : "~/Works/datayo/vietnam-sights/reports/report.Rmd",
+    "project_path" : "reports/report.Rmd",
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_markdown"
+}

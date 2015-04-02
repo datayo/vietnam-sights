@@ -1,0 +1,16 @@
+{
+    "contents" : "sights <- read.csv(\"data/sights_v2.csv\")",
+    "created" : 1427788142658.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3300933178",
+    "id" : "B0A1BE6D",
+    "lastKnownWriteTime" : 1427796867,
+    "path" : "~/Works/datayo/vietnam-sights/R/load.R",
+    "project_path" : "R/load.R",
+    "properties" : {
+    },
+    "source_on_save" : true,
+    "type" : "r_source"
+}

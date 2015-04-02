@@ -1,0 +1,17 @@
+{
+    "contents" : "---\ntitle: \"Vietnamese Sights\"\nauthor: \"Brother Rain\"\ndate: \"30/03/2015\"\noutput: html_document\n---\n\n```{r, echo=FALSE}\nlibrary(leaflet)\n```\n\n```{r, echo=FALSE}\nlibrary(RCurl)\nlibrary(RJSONIO)\nlibrary(plyr)\n\nurl <- function(address, return.call = \"json\", sensor = \"false\") {\n root <- \"http://maps.google.com/maps/api/geocode/\"\n u <- paste(root, return.call, \"?address=\", address, \"&sensor=\", sensor, sep = \"\")\n return(URLencode(u))\n}\n\ngeoCode <- function(address,verbose=FALSE) {\n if(verbose) cat(address,\"\\n\")\n u <- url(address)\n doc <- getURL(u)\n x <- fromJSON(doc,simplify = FALSE)\n if(x$status==\"OK\") {\n     lat <- x$results[[1]]$geometry$location$lat\n     lng <- x$results[[1]]$geometry$location$lng\n     location_type <- x$results[[1]]$geometry$location_type\n     formatted_address <- x$results[[1]]$formatted_address\n     return(c(lat, lng, location_type, formatted_address))\n } else {\n    return(c(NA,NA,NA, NA))\n }\n}\n\n\n##Test with a single address\ngeoCode(\"Tomb of Tu Duc\")\n```\n\n> Vietnam has many sightseeings. Where's sightseeings in Vietnam?\n\n## Data\n\nI use some javascript code to crawl data from [http://www.lonelyplanet.com/vietnam/sights](http://www.lonelyplanet.com/vietnam/sights), the result save in `sights.json` file\n\n```{r}\nrequire(jsonlite)\nsights.raw <- readLines(\"sights.json\")\nsights <- fromJSON(sights.raw)\nfirst <- sights[[2]]\nfirst.name <- first[1]1\nfirst[1]\ngeoCode(first.name)\n```\n\n## EDA",
+    "created" : 1427701363208.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3121627948",
+    "id" : "3845A3A4",
+    "lastKnownWriteTime" : 1427765981,
+    "path" : "~/Works/dataR/vietnam-sights/sights.Rmd",
+    "project_path" : "sights.Rmd",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "r_markdown"
+}

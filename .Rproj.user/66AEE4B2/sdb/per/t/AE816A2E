@@ -1,0 +1,16 @@
+{
+    "contents" : "if(!require(RWordPress)){\n    install.packages(\"RWordPress\", repos=\"http://www.omegahat.org/R\")\n}\n\nrequire(RWordPress)\nrequire(knitr)\noptions(WordpressLogin = c(rain1024 = \"240709010\"),\n        WordpressURL= \"https://datayo.wordpress.com/xmlrpc.php\")\n\nknit2wp.com <- function(file) {\n    require(XML)\n    post.content <- readLines(file)\n    post.content <- gsub(\" <\", \"&nbsp;<\", post.content)\n    post.content <- gsub(\"> \", \">&nbsp;\", post.content)\n    post.content <- htmlTreeParse(post.content)\n    post.content <- paste(capture.output(print(post.content$children$html$children$body, \n                                               indent = FALSE, tagSeparator = \"\")), collapse = \"\\n\")\n    post.content <- gsub(\"<?.body>\", \"\", post.content)\n    post.content <- gsub(\"<p>\", \"<p style=\\\"text-align: justify;\\\">\", post.content)\n    post.content <- gsub(\"<?pre><code class=\\\"r\\\">\", \"\\\\[sourcecode language=\\\"r\\\"\\\\]\\\\\\n \", \n                         post.content)\n    post.content <- gsub(\"<?pre><code class=\\\"no-highlight\\\">\", \"\\\\[sourcecode\\\\]\\\\\\n \", \n                         post.content)\n    post.content <- gsub(\"<?/code></pre>\", \"\\\\\\n\\\\[/sourcecode\\\\]\", post.content)\n    return(post.content)\n}\n\nnewPost(\n    list(\n        description=knit2wp.com('reports/report.html'),\n        title='KAKA',\n        categories=c('r'),\n        mt_keywords=c('research')\n    ),\n    publish=FALSE)\n",
+    "created" : 1427853870839.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "225294603",
+    "id" : "AE816A2E",
+    "lastKnownWriteTime" : 1427854757,
+    "path" : "~/Works/datayo/vietnam-sights/submit.R",
+    "project_path" : "submit.R",
+    "properties" : {
+    },
+    "source_on_save" : true,
+    "type" : "r_source"
+}

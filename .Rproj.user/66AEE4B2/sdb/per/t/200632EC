@@ -1,0 +1,17 @@
+{
+    "contents" : "library(jsonlite)\nlibrary(dplyr)\n\nUrl <- function(address, return.call = \"json\", sensor = \"false\") {\n    root <- \"http://maps.google.com/maps/api/geocode/\"\n    u <- paste(root, return.call, \"?address=\", address, \"&sensor=\", sensor, sep = \"\")\n    return(URLencode(u))\n}\n\nGeoCode <- function(address, verbose=FALSE) {\n    if(verbose) cat(address,\"\\n\")\n    u <- Url(address)\n    x <- fromJSON(txt=u)\n    if(x$status==\"OK\") {\n        lat <- x$results$geometry$location$lat\n        lng <- x$results$geometry$location$lng\n        type <- x$results$geometry$location_type\n        return(c(lat, lng, type))\n    } else {\n        return(c(NA,NA))\n    }\n}\n\nGetLat = function(address){\n    GeoCode(address)[1]\n}\n\nGetLng = function(address){\n    GeoCode(address)[2]\n}\n\nGetType = function(address){\n    GeoCode(address)[3]\n}\n\nGetGeoOfSights <- function(){\n    sights.raw <- readLines(\"data/sights.json\")\n    sights <- fromJSON(sights.raw)\n    sights <- sights %>% mutate(\n        fullLocation = paste(name, address, sep=\", \")\n    ) %>% mutate(\n        lat = GetLat(fullLocation),\n        lng = GetLng(fullLocation),\n        type = GetType(fullLocation)\n    )\n    write.csv(sights, file=\"data/sights.csv\")\n}\n\nGetGeoOfSights()",
+    "created" : 1427788010036.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4036945180",
+    "id" : "200632EC",
+    "lastKnownWriteTime" : 1427852616,
+    "path" : "~/Works/datayo/vietnam-sights/R/func.R",
+    "project_path" : "R/func.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : true,
+    "type" : "r_source"
+}
